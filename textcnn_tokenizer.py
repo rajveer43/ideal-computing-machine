@@ -1,4 +1,3 @@
-
 import pickle
 from keras.preprocessing.sequence import pad_sequences
 from keras_preprocessing.text import Tokenizer
@@ -7,12 +6,15 @@ from config import inputLen
 
 ########################################################################################
 
+
 def train_tokenizer(train_datas, test_datas, tokenizer_file_path):
-    tokenizer = Tokenizer(num_words=None,
-                          filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\t\n',
-                          lower=True,
-                          split=" ",
-                          char_level=False)
+    tokenizer = Tokenizer(
+        num_words=None,
+        filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\t\n',
+        lower=True,
+        split=" ",
+        char_level=False,
+    )
     tokenizer.fit_on_texts(train_datas)
     tokenizer.fit_on_texts(test_datas)
     # print(tokenizer.word_index)
@@ -20,9 +22,9 @@ def train_tokenizer(train_datas, test_datas, tokenizer_file_path):
     train_datas = tokenizer.texts_to_sequences(train_datas)
     test_datas = tokenizer.texts_to_sequences(test_datas)
     train_datas = pad_sequences(
-        train_datas, inputLen, padding='post', truncating='post')
-    test_datas = pad_sequences(
-        test_datas, inputLen, padding='post', truncating='post')
+        train_datas, inputLen, padding="post", truncating="post"
+    )
+    test_datas = pad_sequences(test_datas, inputLen, padding="post", truncating="post")
 
     with open(tokenizer_file_path, "wb") as tokenizer_file:
         pickle.dump(tokenizer, tokenizer_file)
@@ -32,12 +34,15 @@ def train_tokenizer(train_datas, test_datas, tokenizer_file_path):
 
 ########################################################################################
 
+
 def train_tokenizer_with_val(train_datas, val_datas, test_datas, tokenizer_file_path):
-    tokenizer = Tokenizer(num_words=None,
-                          filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\t\n',
-                          lower=True,
-                          split=" ",
-                          char_level=False)
+    tokenizer = Tokenizer(
+        num_words=None,
+        filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\t\n',
+        lower=True,
+        split=" ",
+        char_level=False,
+    )
     tokenizer.fit_on_texts(train_datas)
     tokenizer.fit_on_texts(val_datas)
     tokenizer.fit_on_texts(test_datas)
@@ -47,11 +52,10 @@ def train_tokenizer_with_val(train_datas, val_datas, test_datas, tokenizer_file_
     val_datas = tokenizer.texts_to_sequences(val_datas)
     test_datas = tokenizer.texts_to_sequences(test_datas)
     train_datas = pad_sequences(
-        train_datas, inputLen, padding='post', truncating='post')
-    val_datas = pad_sequences(
-        val_datas, inputLen, padding='post', truncating='post')
-    test_datas = pad_sequences(
-        test_datas, inputLen, padding='post', truncating='post')
+        train_datas, inputLen, padding="post", truncating="post"
+    )
+    val_datas = pad_sequences(val_datas, inputLen, padding="post", truncating="post")
+    test_datas = pad_sequences(test_datas, inputLen, padding="post", truncating="post")
 
     with open(tokenizer_file_path, "wb") as tokenizer_file:
         pickle.dump(tokenizer, tokenizer_file)

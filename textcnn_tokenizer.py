@@ -24,7 +24,9 @@ def train_tokenizer(train_datas, test_datas, tokenizer_file_path):
     train_datas = pad_sequences(
         train_datas, inputLen, padding="post", truncating="post"
     )
-    test_datas = pad_sequences(test_datas, inputLen, padding="post", truncating="post")
+    test_datas = pad_sequences(
+        test_datas, inputLen, padding="post", truncating="post"
+    )
 
     with open(tokenizer_file_path, "wb") as tokenizer_file:
         pickle.dump(tokenizer, tokenizer_file)
@@ -35,7 +37,9 @@ def train_tokenizer(train_datas, test_datas, tokenizer_file_path):
 ########################################################################################
 
 
-def train_tokenizer_with_val(train_datas, val_datas, test_datas, tokenizer_file_path):
+def train_tokenizer_with_val(
+    train_datas, val_datas, test_datas, tokenizer_file_path
+):
     tokenizer = Tokenizer(
         num_words=None,
         filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\t\n',
@@ -54,8 +58,12 @@ def train_tokenizer_with_val(train_datas, val_datas, test_datas, tokenizer_file_
     train_datas = pad_sequences(
         train_datas, inputLen, padding="post", truncating="post"
     )
-    val_datas = pad_sequences(val_datas, inputLen, padding="post", truncating="post")
-    test_datas = pad_sequences(test_datas, inputLen, padding="post", truncating="post")
+    val_datas = pad_sequences(
+        val_datas, inputLen, padding="post", truncating="post"
+    )
+    test_datas = pad_sequences(
+        test_datas, inputLen, padding="post", truncating="post"
+    )
 
     with open(tokenizer_file_path, "wb") as tokenizer_file:
         pickle.dump(tokenizer, tokenizer_file)
